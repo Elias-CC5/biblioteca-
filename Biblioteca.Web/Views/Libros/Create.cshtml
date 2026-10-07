@@ -1,0 +1,35 @@
+﻿@model Biblioteca.Web.Models.Libro
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="Titulo" class="form-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ISBN" class="form-label"></label>
+                <input asp-for="ISBN" class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="AutorId" class="form-label"></label>
+                <select asp-for="AutorId" asp-items="ViewBag.Autores" class="form-select">
+                    <option value="">-- Seleccione Autor --</option>
+                </select>
+                <span asp-validation-for="AutorId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Ejemplares" class="form-label"></label>
+                <input asp-for="Ejemplares" type="number" class="form-control" />
+                <span asp-validation-for="Ejemplares" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

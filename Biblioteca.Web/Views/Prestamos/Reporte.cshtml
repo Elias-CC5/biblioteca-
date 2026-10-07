@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Biblioteca.Web.Models.PrestamoReporte>
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<form asp-action="Reporte" method="get" class="row g-3 mb-4">
+    <div class="col-auto">
+        <label class="col-form-label">Desde:</label>
+    </div>
+    <div class="col-auto">
+        <input type="date" name="desde" value="@ViewData["FechaDesde"]" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <label class="col-form-label">Hasta:</label>
+    </div>
+    <div class="col-auto">
+        <input type="date" name="hasta" value="@ViewData["FechaHasta"]" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Socio</th>
+            <th>Libro</th>
+            <th>Fecha Préstamo</th>
+            <th>Fecha Límite</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SocioNombre</td>
+                <td>@item.LibroTitulo</td>
+                <td>@item.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                <td>@item.FechaLimite.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <span class="badge @(item.Estado == "Pendiente" ? "bg-warning text-dark" : "bg-success")">
+                        @item.Estado
+                    </span>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center">No se encontraron préstamos en el rango de fechas seleccionado.</td>
+        </tr>
+    }
+    </tbody>
+</table>
